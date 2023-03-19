@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>numtice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+        body {
+            background-color: whitesmoke   ;
+        }
+        @keyframes bglg {
+            0% {
+                background: linear-gradient(-45deg, red, pink, cyan, blue, cyan);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            20% {
+                background: linear-gradient(-45deg, pink, red, pink, cyan, blue);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+           40% {
+                background: linear-gradient(-45deg, cyan, pink, red, pink, cyan);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            60% {
+                background: linear-gradient(-45deg, blue, cyan, pink, red, pink);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            80% {
+                background: linear-gradient(-45deg, cyan, blue, cyan, pink, red);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            100% {
+                background: linear-gradient(-45deg, pink, cyan, blue, cyan, pink);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+          /*   75% {
+                background: linear-gradient(-45deg, red, pink, cyan, blue,cyan);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            87.5% {
+                background: linear-gradient(-45deg, pink, red, pink, cyan, blue);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            100% {
+                background: linear-gradient(-45deg, blue, cyan, pink, red, pink);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            } */
+        }   
+
+        .title {
+            font-family:  sans-serif;
+            position: relative;
+            right: 2.5em;
+            width: fit-content;
+            font-weight: 800;
+            transition: 1s;
+            animation: 1s 0s infinite  forwards bglg;
+        }
+        p {
+            font-size: 3em; 
+            color: midnightblue; 
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 700;
+        }
+        .sub, .chk {
+            width: 4em;
+            height: 1.75em;
+            font-size: 1.5em;
+            margin-top: 0.25em;
+            background: whitesmoke;
+            border: solid 1px green;
+            color: green;
+            transition: .2s;
+            cursor: pointer;
+        }
+        .sub:hover {
+            background: green;
+            border: none;
+            color: white;
+        }
+        .chk {
+            width: 8em;
+            color: red;
+            border: solid 1px red;
+        }
+        .chk:hover {
+            color: white;
+            background: red;
+            border: none;
+        }
+        .dev {
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+            color: rgb(29, 29, 29);
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: 800;
+        }
+        #digits {
+            width: 6em;
+            height: 2.5em;
+            font-size: 1.3em;
+            cursor: pointer;
+            border: solid 1px rgb(255, 0, 0);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1 class="title">Numtice</h1>
+    <p id="numbers"></p>
+    <input type="number" id="answer" style="width: 15em; height: 2.75em">
+    <input type="button" value="Submit" onclick="check()" class="sub"> <br><br><br>
+    <input type="button" value="generate / reset" onclick="genNum()" class="chk">
+    <select name="digits" id="digits">digits:
+    <option value="2">2 digits</option>
+    <option value="3">3 digits</option>
+    <option value="4">4 digits</option>
+    <option value="5">5 digits</option>
+</select>
+    <h1 id="checking"></h1>
+</center>
+<span class="dev">für George Gutsohn ❤️</span>
+<script>
+
+    const numbers = document.getElementById('numbers')
+    const number = document.getElementById('answer')
+    const checking = document.getElementById('checking')
+    const digits = document.getElementById('digits')
+
+    let det = 2;
+    
+    let a;
+    let b;
+    let c;
+    let d;
+    
+    digits.addEventListener('change', () => {
+        console.log(digits.value)
+        det = digits.value
+    })
+    
+    function genNum() {
+        if (det == 2) {
+            a = Math.round(Math.random() * (89) + 10)
+            b = Math.round(Math.random() * (89) + 10) 
+            c = Math.round(Math.random() * (89) + 10)
+        } else if (det == 3) {
+            a = Math.round(Math.random() * (899) + 100)
+            b = Math.round(Math.random() * (899) + 100) 
+            c = Math.round(Math.random() * (899) + 100)
+        } else if (det == 4) {
+            a = Math.round(Math.random() * (8999) + 1000)
+            b = Math.round(Math.random() * (8999) + 1000) 
+            c = Math.round(Math.random() * (8999) + 1000)
+        } else {
+            a = Math.round(Math.random() * (89999) + 10000)
+            b = Math.round(Math.random() * (89999) + 10000) 
+            c = Math.round(Math.random() * (89999) + 10000)
+        }
+        
+        numbers.innerHTML = 'numbers: <br>'  + a + '<br>' + b + '<br>' + c
+        d = a + b + c
+        console.log(a + b + c)
+        checking.innerHTML = ''
+        answer.value = ''
+    }
+    function check() {
+        if (answer.value == d) {
+            checking.innerHTML = 'true'
+        } else {
+            checking.innerHTML = 'false, ' + d
+        }
+    }
+
+</script>
+</body>
+</html>
